@@ -469,7 +469,6 @@ def main():
         ### Rename folder to include loss value
         new_outdir = f"loss_{loss:.5f}_{outdir}"
         # Remove new outdir if it already exists (regardless of content)
-        import shutil
         if os.path.exists(new_outdir):
             shutil.rmtree(new_outdir)
 
