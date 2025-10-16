@@ -8,6 +8,8 @@ This repository contains code and data for fitting an Erlang-chain ODE model to 
 
 - Hyphae (H) – filamentous cells that contribute to new blastoconidia formation and biofilm structure.
 
+![Visual overview of the Erlang-Chain model for differentiation](/assets/overview.png)
+
 ## Model Overview
 
 To more accurately describe the timing of cell differentiation, each population (B, S, H) is represented as a chain of sub-stages (Erlang-chain formulation). This approach captures waiting times between transitions, corresponding biologically to internal cell development processes such as growth, DNA replication, and morphogenesis.
