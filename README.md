@@ -8,7 +8,7 @@ This repository contains code and data for fitting an Erlang-chain ODE model to 
 
 - Hyphae (H) – filamentous cells that contribute to new blastoconidia formation and biofilm structure.
 
-![Visual overview of the Erlang-Chain model for differentiation](/assets/overview.png)
+![Visual overview of the Erlang-Chain model for differentiation](overview.png)
 
 ## Model Overview
 
