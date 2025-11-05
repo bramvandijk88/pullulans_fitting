@@ -1,6 +1,6 @@
 # Erlang-Chain ODE Model for A. pullulans differentiation
 
-This repository contains code and data for fitting an Erlang-chain ODE model to describe the differentiation dynamics of Aureobasidium pullulans, based on quantitative time-lapse microscopy data (Rensink et al., 2024). The model captures the temporal changes in three key cell types:
+This repository contains code and data for fitting an Erlang-chain ODE model to describe the differentiation dynamics of Aureobasidium pullulans, based on quantitative time-lapse microscopy data (Rensink et al., 2025). The model captures the temporal changes in three key cell types:
 
 - Blastoconidia (B) – asexual spores that can divide or differentiate into swollen cells.
 
