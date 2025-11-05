@@ -34,10 +34,10 @@ Sum of Squared Errors (SSE) between simulated and observed cell-type percentages
 
 A non-growth penalty, discouraging trivial solutions where no growth occurs.
 
-## ODE model (plain Markdown source)
+## ODE model 
 
 ### Erlang-chain state variables
-Let `B_i` for `i = 1..k_B`, `S_i` for `i = 1..k_S`, and `H_i` for `i = 1..k_H` denote the Erlang sub-stages of Blastoconidia, Swollen cells, and Hyphae, respectively. Totals are `B = Σ_i B_i`, `S = Σ_i S_i`, `H = Σ_i H_i`.
+Let `B_i` for `i = 0..k_B-1`, `S_i` for `i = 0..k_S-1`, and `H_i` for `i = 0..k_H-1` denote the Erlang sub-stages of Blastoconidia, Swollen cells, and Hyphae, respectively. Totals are `B = Σ_i B_i`, `S = Σ_i S_i`, `H = Σ_i H_i`.
 
 Define stage-throughput rates from waiting times (minutes → hours):
 
@@ -45,42 +45,41 @@ Define stage-throughput rates from waiting times (minutes → hours):
 - `a_S = k_S / (tau_S / 60)`
 - `a_H = k_H / (tau_H / 60)`
 
-Parameters (per hour unless stated): `p_BS`, `p_SH` (transitions), `r_BB`, `r_SB`, `r_HB` (birth rates into `B_1`), `d_B`, `d_S`, `d_H` (decay on last stages only), `tau_B`, `tau_S`, `tau_H` (minutes).
+Parameters (per hour unless stated): `p_BS`, `p_SH` (transitions), `r_BB`, `r_SB`, `r_HB` (birth rates into `B_0`), `d_B`, `d_S`, `d_H` (decay on last stages only), `tau_B`, `tau_S`, `tau_H` (minutes).
 
 ### Births into the first B sub-stage
-`dB_1/dt = r_BB·B_{k_B} + r_SB·S_{k_S} + r_HB·H_{k_H} − a_B·B_1`
+`dB_0/dt = r_BB·B_{k_B} + r_SB·S_{k_S} + r_HB·H_{k_H} − a_B·B_0`
 
-### Internal Erlang flows for B (no births except in `B_1`)
-For `j = 2..k_B−1`:
+### Internal Erlang flows for B 
+For `j = 1..k_B−2`:
 `dB_j/dt = a_B·B_{j−1} − a_B·B_j`
 
-Last B stage (`j = k_B`):
+Last B stage (`j = k_B-1`):
 `dB_{k_B}/dt = a_B·B_{k_B−1} − p_BS·B_{k_B} − d_B·B_{k_B}`
 
 ### Erlang flows and transitions for S
 Entry from `B_{k_B}` to the first S stage:
-`dS_1/dt = p_BS·B_{k_B} − a_S·S_1`
+`dS_0/dt = p_BS·B_{k_B} − a_S·S_0`
 
-For `j = 2..k_S−1`:
+For `j = 1..k_S−2`:
 `dS_j/dt = a_S·S_{j−1} − a_S·S_j`
 
-Last S stage (`j = k_S`):
+Last S stage (`j = k_S-1`):
 `dS_{k_S}/dt = a_S·S_{k_S−1} − p_SH·S_{k_S} − d_S·S_{k_S}`
 
 ### Erlang flows and transitions for H
 Entry from `S_{k_S}` to the first H stage:
-`dH_1/dt = p_SH·S_{k_S} − a_H·H_1`
+`dH_0/dt = p_SH·S_{k_S} − a_H·H_0`
 
-For `j = 2..k_H−1`:
+For `j = 1..k_H−2`:
 `dH_j/dt = a_H·H_{j−1} − a_H·H_j`
 
-Last H stage (`j = k_H`):
+Last H stage (`j = k_H-1`):
 `dH_{k_H}/dt = a_H·H_{k_H−1} − d_H·H_{k_H}`
 
 ### Notes
-- Births from `B_{k_B}`, `S_{k_S}`, and `H_{k_H}` contribute **only** to `B_1`.
-- Decay terms `d_B`, `d_S`, `d_H` are applied **only to the last stage** of each chain, as in the code.
-- In the shared code, any negative states are clipped to zero inside the RHS for numerical stability; analytically, states are non-negative by construction.
+- Only fully developed cells (last compartment in the chain) can give birth or die
+- Births from `B_{k_B}`, `S_{k_S}`, and `H_{k_H}` contribute **only** to `B_0`.
 
 Model parameters were fitted using differential evolution (scipy.optimize.differential_evolution) with a loss function combining:
 
@@ -118,7 +117,7 @@ With optional command line arguments:
 - --seed <INT>, RNG seed for fitting
 - --kB <INT>, length of B chain
 - --kS <INT>, length of S chain
-- --kH <INT>, length of H chainrain CBS58475
+- --kH <INT>, length of H chain
 
 ## Dependencies:
 
@@ -130,7 +129,6 @@ With optional command line arguments:
 ## Citation
 
 This work has supported the following publication:
-
 Rensink S., B,. van Dijk, Struck C., Wösten H.A.B. (2025) Swollen cells act as a hub for differentiation in Aureobasidium pullulans [In prep].
 
 ## License
