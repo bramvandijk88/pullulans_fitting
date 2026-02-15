@@ -2,14 +2,6 @@
 
 This repository contains code and data for fitting an Erlang-chain ODE model to describe the differentiation dynamics of Aureobasidium pullulans, based on quantitative time-lapse microscopy data (Rensink et al., 2025). 
 
-For reproduction, please ensure the following versions of Python and packages are installed:
-
-- Python: 3.13.5
-- numpy: 2.2.5
-- pandas: 2.2.3
-- matplotlib: 3.10.0
-- scipy: 1.15.3
-
 The model captures the temporal changes in three key cell types:
 
 - Blastoconidia (B) – asexual spores that can divide or differentiate into swollen cells.
@@ -131,10 +123,13 @@ With optional command line arguments:
 
 ## Dependencies:
 
-- numpy
-- scipy
-- matplotlib
-- pandas
+For reproduction, please ensure the following versions of Python and packages are installed:
+
+- Python: 3.13.5
+- numpy: 2.2.5
+- pandas: 2.2.3
+- matplotlib: 3.10.0
+- scipy: 1.15.3
 
 ## Citation
 
