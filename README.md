@@ -110,7 +110,7 @@ Data were obtained using an oCelloScope imager and include time series of cell-t
 
 # Fit model to a specific strain:
 
-`python fit_erlang_chain.py`
+`python erlang_pullulans_fitting.py`
 
 With optional command line arguments:
 
